@@ -1,0 +1,62 @@
+.about-page {
+  min-height: 100vh;
+  background-color: #F2F2F7;
+  padding-bottom: 60px;
+}
+
+.fade-in { animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.delay-1 { animation-delay: 0.1s; }
+.delay-2 { animation-delay: 0.2s; }
+.delay-3 { animation-delay: 0.3s; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+/* 头部 */
+.header-section {
+  display: flex; flex-direction: column; align-items: center;
+  padding: 48px 20px 24px;
+}
+
+.app-icon-container {
+  width: 88px; height: 88px;
+  border-radius: 22px;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 16px;
+}
+.shadow-blue { box-shadow: 0 12px 24px rgba(0, 122, 255, 0.3); }
+
+.app-icon { font-size: 48px; }
+.app-name { font-size: 24px; font-weight: 700; letter-spacing: -0.5px; margin-bottom: 4px; }
+.app-version { font-size: 15px; color: rgba(60,60,67,0.6); font-weight: 500; }
+
+/* iOS Inset Grouped Form */
+.ios-form-group { margin: 0 16px 24px; }
+.ios-form-header { font-size: 13px; text-transform: uppercase; color: rgba(60,60,67,0.6); margin: 0 0 8px 16px; font-weight: 600; letter-spacing: 0.5px; }
+
+.ios-form-cell {
+  background-color: #FFFFFF;
+  padding: 16px 20px;
+  border-bottom: 0.5px solid rgba(60,60,67,0.1);
+}
+.ios-form-cell:first-child { border-radius: 12px 12px 0 0; }
+.ios-form-cell:last-child { border-bottom: none; border-radius: 0 0 12px 12px; }
+.ios-form-cell:only-child { border-radius: 12px; }
+
+.block-cell { padding: 20px; }
+
+.content-text { font-size: 16px; color: #000000; line-height: 1.6; }
+
+/* 流程步骤 */
+.step-row { display: flex; align-items: center; gap: 16px; }
+.step-num { width: 28px; height: 28px; background-color: rgba(0,122,255,0.1); color: #007AFF; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 15px; }
+.step-text { font-size: 16px; font-weight: 500; }
+
+/* 隐私列表 */
+.privacy-list { display: flex; flex-direction: column; gap: 16px; }
+.privacy-item { display: flex; align-items: flex-start; gap: 12px; }
+.p-icon { font-size: 20px; }
+.p-text { font-size: 15px; line-height: 1.5; color: #333; margin-top: 2px; }
+
+/* 底部 */
+.footer-section { padding: 32px 20px; text-align: center; display: flex; flex-direction: column; gap: 8px; }
+.footer-text { font-size: 13px; color: rgba(60,60,67,0.4); }
+.copyright { font-weight: 500; }
