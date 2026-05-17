@@ -1,0 +1,6 @@
+{
+  "usingComponents": {},
+  "navigationBarTitleText": "伯恩斯情绪记录",
+  "backgroundColor": "#F2F2F7",
+  "enablePullDownRefresh": false
+}

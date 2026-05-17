@@ -1,0 +1,451 @@
+<wxs module="utils">
+module.exports = {
+  includes: function(arr, val) {
+    if (!arr) return false;
+    return arr.indexOf(val) !== -1;
+  }
+}
+</wxs>
+
+<view class="page-container">
+  
+  <view class="top-bar glass-effect">
+    <view class="app-title">伯恩斯情绪记录</view>
+    <view class="top-actions">
+      <view class="icon-btn" hover-class="btn-hover" bindtap="onShowEncouragement"><text class="icon">💝</text></view>
+      <view class="icon-btn" hover-class="btn-hover" bindtap="onShowHistory"><text class="icon">📋</text></view>
+      <view class="icon-btn" hover-class="btn-hover" bindtap="onGoToAbout"><text class="icon">ℹ️</text></view>
+    </view>
+  </view>
+
+  <view class="section-card fade-in">
+    <view class="section-header">
+      <view class="step-badge">1</view>
+      <text class="section-title">事件描述</text>
+    </view>
+    <view class="section-description">客观写下触发情绪的具体事件（只写事实，不加评价）</view>
+    <view class="textarea-wrapper">
+      <textarea class="ios-textarea" placeholder="例如：今天在会议上忘记了准备好的汇报内容..." value="{{record.eventDescription}}" bindinput="onEventInput" maxlength="-1" auto-height></textarea>
+    </view>
+  </view>
+
+  <view class="section-card fade-in delay-1">
+    <view class="section-header">
+      <view class="step-badge">2</view>
+      <text class="section-title">情绪</text>
+    </view>
+    <view class="section-description">从情绪库中选择情绪类别，并评估当前强度</view>
+
+    <view wx:if="{{record.emotions.length > 0}}" class="selected-emotions-area">
+      <view class="subsection-title">已选情绪</view>
+      <block wx:for="{{record.emotions}}" wx:key="categoryId">
+        <view class="emotion-item">
+          <view class="emotion-item-header">
+            <view class="emotion-header-left" bindtap="toggleEmotion" data-category-id="{{item.categoryId}}">
+              <text class="emotion-category-name">{{item.categoryName}}</text>
+              <image class="collapse-icon {{utils.includes(expandedEmotions, item.categoryId) ? 'expanded' : ''}}" src="/images/hide.svg" mode="aspectFit"></image>
+            </view>
+            <view class="emotion-item-actions">
+              <view class="icon-btn-text" hover-class="btn-hover" bindtap="onOpenEmotionPicker" data-category-id="{{item.categoryId}}" data-category-name="{{item.categoryName}}">编辑</view>
+              <view class="icon-btn-text danger" hover-class="btn-hover" bindtap="onRemoveEmotionCategory" data-category-id="{{item.categoryId}}">移除</view>
+            </view>
+          </view>
+          
+          <view wx:if="{{utils.includes(expandedEmotions, item.categoryId)}}" class="emotion-content">
+            <view class="selected-emotions-list">
+              <block wx:for="{{item.selectedEmotions}}" wx:for-item="emotion" wx:key="*this"><view class="emotion-tag">{{emotion}}</view></block>
+              <block wx:for="{{item.customEmotions}}" wx:for-item="emotion" wx:key="*this"><view class="emotion-tag custom">{{emotion}}</view></block>
+            </view>
+            <view class="ios-divider"></view>
+            <view class="intensity-slider">
+              <text class="slider-label">感知强度: <text class="slider-value">{{item.beforeIntensity}}</text></text>
+              <slider class="ios-slider" value="{{item.beforeIntensity}}" min="0" max="100" step="1" activeColor="#007AFF" backgroundColor="rgba(118,118,128,0.12)" block-size="24" bindchange="onBeforeIntensityChange" data-index="{{index}}"/>
+            </view>
+          </view>
+        </view>
+      </block>
+    </view>
+
+    <view class="emotion-library">
+      <view class="subsection-title emotion-library-header" bindtap="toggleEmotionLibrary">
+        <text>添加情绪分类</text>
+        <image class="collapse-icon {{emotionLibraryExpanded ? 'expanded' : ''}}" src="/images/hide.svg" mode="aspectFit"></image>
+      </view>
+      <view wx:if="{{emotionLibraryExpanded}}" class="emotion-categories-grid">
+        <block wx:for="{{emotionCategories}}" wx:key="id">
+          <view class="emotion-category-card" hover-class="card-hover" bindtap="onOpenEmotionPicker" data-category-id="{{item.id}}" data-category-name="{{item.name}}">
+            <text class="category-name">{{item.name}}</text>
+            <view class="icon-add-plus">＋</view>
+          </view>
+        </block>
+      </view>
+    </view>
+  </view>
+
+  <!-- 步骤3：认知重构 -->
+  <view class="section-card fade-in delay-2">
+    <view class="section-header">
+      <view class="step-badge">3</view>
+      <text class="section-title">认知重构</text>
+    </view>
+    <view class="section-description">记录想法，识别认知扭曲，使用"如果法"追问，重构理性思维</view>
+
+    <block wx:for="{{record.negativeThoughts}}" wx:key="id" wx:for-index="thoughtIndex">
+      <view class="thought-item">
+        <view class="thought-header">
+          <view class="thought-header-left" bindtap="toggleThought" data-thought-id="{{item.id}}">
+            <text wx:if="{{!utils.includes(expandedThoughts, item.id)}}" class="thought-summary">想法 {{thoughtIndex + 1}}：{{item.summaryText}}</text>
+            <text wx:else class="thought-number">想法 {{thoughtIndex + 1}}</text>
+            <image class="collapse-icon {{utils.includes(expandedThoughts, item.id) ? 'expanded' : ''}}" src="/images/hide.svg" mode="aspectFit"></image>
+          </view>
+          <view class="icon-btn-text danger" hover-class="btn-hover" bindtap="onDeleteNegativeThought" data-thought-id="{{item.id}}">删除</view>
+        </view>
+        
+        <view wx:if="{{utils.includes(expandedThoughts, item.id)}}" class="thought-content">
+          <view class="ios-divider"></view>
+
+          <!-- 初始消极想法 -->
+          <view class="thought-block">
+            <view class="block-title">原始想法</view>
+            <!-- 增加下边距，区隔文本与滑块 -->
+            <view class="textarea-wrapper error-tint margin-b-16">
+              <textarea class="ios-textarea" placeholder="写下你脑海中的消极想法..." value="{{item.content}}" bindinput="onThoughtContentInput" data-index="{{thoughtIndex}}" maxlength="-1" auto-height></textarea>
+            </view>
+            <view class="intensity-slider">
+              <text class="slider-label">相信程度: <text class="slider-value error">{{item.beforeBelief}}</text></text>
+              <slider class="ios-slider" value="{{item.beforeBelief}}" min="0" max="100" activeColor="#FF3B30" backgroundColor="rgba(118,118,128,0.12)" block-size="24" bindchange="onBeforeBeliefChange" data-index="{{thoughtIndex}}"/>
+            </view>
+          </view>
+
+          <view class="thought-actions-row">
+            <view class="thought-action-btn {{item.distortions.length > 0 ? 'active' : ''}}" hover-class="btn-hover" bindtap="onShowDistortionPicker" data-index="{{thoughtIndex}}">
+              <text class="action-icon">🔍</text>
+              <!-- 加入单行截断，防止选择太多撑破按钮 -->
+              <text class="action-text single-line">{{item.distortions.length > 0 ? item.distortionNamesStr : '识别认知扭曲'}}</text>
+            </view>
+            <view class="thought-action-btn" hover-class="btn-hover" bindtap="onAddIfThenQuestion" data-index="{{thoughtIndex}}">
+              <text class="action-icon">🤔</text>
+              <text class="action-text">深度追问</text>
+            </view>
+          </view>
+
+          <!-- 追问记录列表 -->
+          <view class="chat-thread" wx:if="{{item.ifThenQuestions.length > 0}}">
+            <block wx:for="{{item.ifThenQuestions}}" wx:for-item="question" wx:for-index="questionIndex" wx:key="id">
+              <view class="chat-bubble fade-in">
+                <view class="bubble-header">
+                  <text class="bubble-title">就算是真的会怎样？</text>
+                  <view class="bubble-close" hover-class="btn-hover" bindtap="onDeleteIfThenQuestion" data-thought-index="{{thoughtIndex}}" data-question-id="{{question.id}}">✕</view>
+                </view>
+                <textarea class="bubble-textarea" placeholder="我的回答是..." value="{{question.answer}}" bindinput="onIfThenAnswerInput" data-thought-index="{{thoughtIndex}}" data-question-index="{{questionIndex}}" maxlength="-1" auto-height></textarea>
+              </view>
+            </block>
+          </view>
+
+          <view class="ios-divider"></view>
+
+          <!-- 理性重构想法 -->
+          <view class="thought-block">
+            <view class="block-title">理性重构</view>
+            <view class="textarea-wrapper success-tint margin-b-16">
+              <textarea class="ios-textarea" placeholder="基于事实和理性思考，重构更合理的想法..." value="{{item.positiveThought}}" bindinput="onPositiveThoughtInput" data-index="{{thoughtIndex}}" maxlength="-1" auto-height></textarea>
+            </view>
+            <view class="intensity-slider">
+              <text class="slider-label">相信程度: <text class="slider-value success">{{item.positiveBeliefBefore}}</text></text>
+              <slider class="ios-slider" value="{{item.positiveBeliefBefore}}" min="0" max="100" activeColor="#34C759" backgroundColor="rgba(118,118,128,0.12)" block-size="24" bindchange="onPositiveBeliefChange" data-index="{{thoughtIndex}}"/>
+            </view>
+          </view>
+        </view>
+      </view>
+    </block>
+
+    <view class="ios-btn-secondary dashed-btn" hover-class="btn-hover" bindtap="onAddNegativeThought">
+      <text>＋ 新增想法</text>
+    </view>
+
+    <view class="distortions-reference-container">
+      <view class="ios-cell guide-cell" hover-class="cell-hover" bindtap="onShowDistortionGuide">
+        <text class="ios-cell-title guide-title">📘 认知扭曲参考指南</text>
+        <text class="ios-cell-arrow">›</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 步骤4：复盘评分 -->
+  <view class="section-card fade-in delay-3">
+    <view class="section-header">
+      <view class="step-badge">4</view>
+      <text class="section-title">复盘评估</text>
+    </view>
+    <view class="section-description">完成重构后，重新评估情绪与想法的变化</view>
+
+    <view wx:if="{{record.emotions.length > 0}}" class="review-section">
+      <view class="subsection-title large-title">情绪改善情况</view>
+      <block wx:for="{{record.emotions}}" wx:key="categoryId">
+        <view class="review-item">
+          <!-- 采用绝对对齐排版 -->
+          <view class="review-item-header flex-row-between">
+            <text class="category-name">{{item.categoryName}}</text>
+            <view class="score-compare">
+              <text class="score-old">{{item.beforeIntensity}}</text>
+              <text class="score-arrow">➔</text>
+              <text class="score-new {{item.afterIntensity < item.beforeIntensity ? 'success' : (item.afterIntensity > item.beforeIntensity ? 'error' : '')}}">{{item.afterIntensity}}</text>
+            </view>
+          </view>
+          <slider class="ios-slider" value="{{item.afterIntensity}}" min="0" max="100" activeColor="#34C759" backgroundColor="rgba(118,118,128,0.12)" block-size="24" bindchange="onAfterIntensityChange" data-index="{{index}}"/>
+        </view>
+      </block>
+    </view>
+
+    <view wx:if="{{record.negativeThoughts.length > 0}}" class="review-section">
+      <view class="subsection-title large-title">信念改善情况</view>
+      <block wx:for="{{record.negativeThoughts}}" wx:key="id">
+        <view class="review-item">
+          <view class="review-item-header flex-row-between">
+            <text class="thought-preview bold">{{item.content}}</text>
+            <view class="score-compare">
+              <text class="score-old">{{item.beforeBelief}}</text>
+              <text class="score-arrow">➔</text>
+              <text class="score-new {{item.afterBelief < item.beforeBelief ? 'success' : (item.afterBelief > item.beforeBelief ? 'error' : '')}}">{{item.afterBelief}}</text>
+            </view>
+          </view>
+          <slider class="ios-slider" value="{{item.afterBelief}}" min="0" max="100" activeColor="#34C759" backgroundColor="rgba(118,118,128,0.12)" block-size="24" bindchange="onAfterBeliefChange" data-index="{{index}}"/>
+        </view>
+      </block>
+    </view>
+  </view>
+
+  <view class="bottom-bar glass-effect">
+    <view class="btn-group">
+      <view class="ios-btn-secondary" hover-class="btn-hover" bindtap="onReset">重置</view>
+      <view class="ios-btn-secondary" hover-class="btn-hover" bindtap="onShowImport">导入</view>
+      <view class="ios-btn-primary shadow-blue flex-2" hover-class="btn-primary-hover" bindtap="onShowExport">导出记录</view>
+    </view>
+  </view>
+  <view class="safe-area-bottom"></view>
+</view>
+
+<!-- ================= 弹窗区 ================= -->
+<view wx:if="{{showEmotionPicker}}" class="modal-overlay glass-overlay" bindtap="onCancelAddEmotion">
+  <view class="ios-modal glass-panel" catchtap="noop">
+    <view class="ios-modal-header">
+      <text class="ios-modal-title">{{currentPickerCategory.categoryName}}</text>
+      <view class="ios-modal-close" hover-class="btn-hover" bindtap="onCancelAddEmotion">关闭</view>
+    </view>
+    <scroll-view class="ios-modal-content scrollable" scroll-y>
+      <view class="picker-tip">点选情绪词汇，或并列添加自定义情绪</view>
+      <view class="emotions-picker-list">
+        <block wx:for="{{pickerEmotions}}" wx:key="*this">
+          <view class="ios-tag {{utils.includes(tempSelectedEmotions, item) ? 'active' : ''}}" hover-class="tag-hover" bindtap="onToggleEmotionInPicker" data-emotion="{{item}}"><text>{{item}}</text></view>
+        </block>
+        <block wx:for="{{tempCustomEmotions}}" wx:key="*this">
+          <view class="ios-tag custom active" hover-class="tag-hover" bindtap="onRemoveCustomEmotionInPicker" data-emotion="{{item}}"><text>{{item}} ✕</text></view>
+        </block>
+        <view class="ios-tag add-btn" hover-class="tag-hover" bindtap="onShowCustomEmotionInput"><text>＋ 自定义</text></view>
+      </view>
+    </scroll-view>
+    <view class="ios-modal-footer">
+      <view class="ios-btn-primary full-width" hover-class="btn-primary-hover" bindtap="onConfirmAddEmotion">完成选择</view>
+    </view>
+  </view>
+</view>
+
+<view wx:if="{{showCustomEmotionInput}}" class="modal-overlay glass-overlay" bindtap="onCancelCustomEmotion">
+  <view class="ios-modal alert glass-panel" catchtap="noop">
+    <view class="ios-modal-header no-border"><text class="ios-modal-title">自定义情绪</text></view>
+    <view class="ios-modal-content">
+      <view class="textarea-wrapper shadow-inner"><input class="ios-input" placeholder="输入具体词汇..." value="{{customEmotionName}}" bindinput="onCustomEmotionInput" maxlength="8" auto-focus /></view>
+    </view>
+    <view class="ios-modal-footer flex-row no-border">
+      <view class="ios-btn-secondary flex-1" hover-class="btn-hover" bindtap="onCancelCustomEmotion">取消</view>
+      <view class="ios-btn-primary flex-1 shadow-blue" hover-class="btn-primary-hover" bindtap="onConfirmCustomEmotion">确认</view>
+    </view>
+  </view>
+</view>
+
+<view wx:if="{{showDistortionGuideModal}}" class="modal-overlay glass-overlay" bindtap="onCloseDistortionGuide">
+  <view class="ios-modal large glass-panel" catchtap="noop">
+    <view class="ios-modal-header">
+      <text class="ios-modal-title">认知扭曲参考指南</text>
+      <view class="ios-modal-close" hover-class="btn-hover" bindtap="onCloseDistortionGuide">关闭</view>
+    </view>
+    <scroll-view class="ios-modal-content scrollable" scroll-y>
+      <block wx:for="{{cognitiveDistortions}}" wx:key="id">
+        <view class="guide-item">
+          <view class="guide-name">{{index + 1}}. {{item.name}}</view>
+          <view class="guide-desc">{{item.description}}</view>
+        </view>
+      </block>
+    </scroll-view>
+  </view>
+</view>
+
+<view wx:if="{{showDistortionPicker}}" class="modal-overlay glass-overlay" bindtap="onCancelDistortions">
+  <view class="ios-modal large glass-panel" catchtap="noop">
+    <view class="ios-modal-header">
+      <text class="ios-modal-title">识别认知扭曲</text>
+      <view class="ios-modal-close" hover-class="btn-hover" bindtap="onCancelDistortions">取消</view>
+    </view>
+    <scroll-view class="ios-modal-content scrollable" scroll-y>
+      <view class="picker-tip">选出你认为这个想法中包含的思维陷阱</view>
+      <view class="ios-list">
+        <block wx:for="{{cognitiveDistortions}}" wx:key="id">
+          <view class="ios-list-item" hover-class="cell-hover" bindtap="onToggleDistortion" data-distortion-id="{{item.id}}">
+            <view class="ios-list-item-body">
+              <view class="ios-list-item-title">{{item.name}}</view>
+              <view class="ios-list-item-desc">{{item.description}}</view>
+            </view>
+            <view class="ios-list-item-check {{utils.includes(tempSelectedDistortions, item.id) ? 'checked' : ''}}">✓</view>
+          </view>
+        </block>
+      </view>
+    </scroll-view>
+    <view class="ios-modal-footer">
+      <view class="ios-btn-primary full-width" hover-class="btn-primary-hover" bindtap="onConfirmDistortions">确认识别</view>
+    </view>
+  </view>
+</view>
+
+<view wx:if="{{showExportModal}}" class="modal-overlay glass-overlay" bindtap="onCloseExport">
+  <view class="ios-modal large glass-panel" catchtap="noop">
+    <view class="ios-modal-header">
+      <text class="ios-modal-title">导出与保存</text>
+      <view class="ios-modal-close" hover-class="btn-hover" bindtap="onCloseExport">关闭</view>
+    </view>
+    <view class="ios-segment-control">
+      <view class="ios-segment {{exportViewMode === 'preview' ? 'active' : ''}}" bindtap="onSwitchExportView" data-mode="preview">预览</view>
+      <view class="ios-segment {{exportViewMode === 'code' ? 'active' : ''}}" bindtap="onSwitchExportView" data-mode="code">Markdown</view>
+    </view>
+    <scroll-view class="ios-modal-content scrollable {{exportViewMode === 'code' ? 'markdown-bg' : 'preview-bg'}}" scroll-y>
+      <view wx:if="{{exportViewMode === 'preview'}}" class="visual-preview">
+        <view class="vp-header">伯恩斯情绪分析报告</view>
+        <view class="vp-card">
+          <view class="vp-title">事实记录</view>
+          <view class="vp-text">{{record.eventDescription}}</view>
+        </view>
+        <view class="vp-card">
+          <view class="vp-title">情绪档案</view>
+          <block wx:for="{{record.emotions}}" wx:key="categoryId">
+            <view class="vp-row">
+              <text class="vp-dot">●</text>
+              <text>{{item.categoryName}}: {{item.selectedEmotions.join(',')}} ({{item.beforeIntensity}}→{{item.afterIntensity}})</text>
+            </view>
+          </block>
+        </view>
+        <view class="vp-card">
+          <view class="vp-title">认知重构</view>
+          <block wx:for="{{record.negativeThoughts}}" wx:key="id">
+            <view class="vp-thought">
+              <view class="vp-t-bad">💭 想法: {{item.content}} ({{item.beforeBelief}}→{{item.afterBelief}})</view>
+              <view class="vp-t-dist">🔍 扭曲: {{item.distortionNamesStr}}</view>
+              <view class="vp-t-good">🌟 重构: {{item.positiveThought}}</view>
+            </view>
+          </block>
+        </view>
+      </view>
+      <text wx:else class="markdown-text" user-select decode="true">{{exportMarkdown}}</text>
+    </scroll-view>
+    <view class="ios-modal-footer">
+      <label class="ios-checkbox-label" hover-class="btn-hover" bindtap="onToggleSaveToHistory">
+        <checkbox class="ios-checkbox" checked="{{saveToHistory}}" color="#007AFF"/> 导出时同步保存至本地历史
+      </label>
+      <view class="ios-btn-primary full-width shadow-blue" hover-class="btn-primary-hover" bindtap="onCopyMarkdown">复制 Markdown 到剪贴板</view>
+    </view>
+  </view>
+</view>
+
+<view wx:if="{{showEncouragementModal}}" class="modal-overlay dark-overlay" bindtap="onCloseEncouragement">
+  <view class="encouragement-card" catchtap="noop">
+    <view class="encourage-glow"></view>
+    <view class="encouragement-icon">✨</view>
+    <view class="encouragement-text">{{encouragementText}}</view>
+    <view class="ios-btn-primary round shadow-blue full-width" hover-class="btn-primary-hover" bindtap="onCloseEncouragement">收下这份温暖</view>
+  </view>
+</view>
+
+<view wx:if="{{showImportModal}}" class="modal-overlay glass-overlay" bindtap="onCancelImport">
+  <view class="ios-modal large glass-panel" catchtap="noop">
+    <view class="ios-modal-header">
+      <text class="ios-modal-title">恢复记录</text>
+      <view class="ios-modal-close" hover-class="btn-hover" bindtap="onCancelImport">取消</view>
+    </view>
+    <view class="ios-modal-content scrollable flex-col">
+      <view class="picker-tip">粘贴之前导出的 Markdown 文本恢复数据</view>
+      <view class="textarea-wrapper shadow-inner flex-1">
+        <textarea class="ios-textarea h-full" placeholder="在此长按并粘贴..." value="{{importMarkdown}}" bindinput="onImportInput" maxlength="-1"></textarea>
+      </view>
+    </view>
+    <view class="ios-modal-footer">
+      <view class="ios-btn-primary full-width shadow-blue" hover-class="btn-primary-hover" bindtap="onConfirmImport">解析并覆盖当前内容</view>
+    </view>
+  </view>
+</view>
+
+<view wx:if="{{showHistoryModal}}" class="modal-overlay glass-overlay" bindtap="onCloseHistory">
+  <view class="ios-modal large glass-panel" catchtap="noop">
+    <view class="ios-modal-header">
+      <text class="ios-modal-title">历史记录</text>
+      <view class="ios-modal-close" hover-class="btn-hover" bindtap="onCloseHistory">完成</view>
+    </view>
+    <scroll-view class="ios-modal-content scrollable" scroll-y>
+      <block wx:if="{{historyRecords.length > 0}}">
+        <view class="ios-list group">
+          <block wx:for="{{historyRecords}}" wx:key="id">
+            <view class="ios-list-item" hover-class="cell-hover" bindtap="onViewHistoryDetail" data-record="{{item}}">
+              <view class="ios-list-item-body">
+                <view class="ios-list-item-title single-line">{{item.eventDescription || '未填写事件描述'}}</view>
+                <view class="ios-list-item-desc">{{formatTimestamp(item.timestamp)}} · 情绪:{{item.emotions.length}} · 想法:{{item.negativeThoughts.length}}</view>
+              </view>
+              <view class="ios-list-item-arrow">›</view>
+            </view>
+          </block>
+        </view>
+      </block>
+      <view wx:else class="empty-state">
+        <text class="empty-emoji">📭</text>
+        <text class="empty-text">暂无记录\n导出时勾选保存即可在此查看</text>
+      </view>
+    </scroll-view>
+  </view>
+</view>
+
+<view wx:if="{{showHistoryDetailModal}}" class="modal-overlay glass-overlay" bindtap="onCloseHistoryDetail">
+  <view class="ios-modal large glass-panel" catchtap="noop">
+    <view class="ios-modal-header">
+      <text class="ios-modal-title">记录详情</text>
+      <view class="ios-modal-close" hover-class="btn-hover" bindtap="onCloseHistoryDetail">返回</view>
+    </view>
+
+      <scroll-view class="ios-modal-content scrollable preview-bg" scroll-y>
+    <view class="visual-preview">
+      <view class="vp-card">
+        <view class="vp-title">事实记录</view>
+        <view class="vp-text" user-select="true">{{currentHistoryRecord.eventDescription || '无'}}</view>
+      </view>
+      <view class="vp-card" wx:if="{{currentHistoryRecord.emotions.length > 0}}">
+        <view class="vp-title">情绪档案</view>
+        <block wx:for="{{currentHistoryRecord.emotions}}" wx:key="categoryId">
+          <view class="vp-row">
+            <text class="vp-dot">●</text>
+            <text>{{item.categoryName}}: {{item.selectedEmotions.join(',')}} ({{item.beforeIntensity}}➔{{item.afterIntensity}})</text>
+          </view>
+        </block>
+      </view>
+      <view class="vp-card" wx:if="{{currentHistoryRecord.negativeThoughts.length > 0}}">
+        <view class="vp-title">认知重构</view>
+        <block wx:for="{{currentHistoryRecord.negativeThoughts}}" wx:key="id">
+          <view class="vp-thought">
+            <view class="vp-t-bad">💭 想法: {{item.content}} ({{item.beforeBelief}}➔{{item.afterBelief}})</view>
+            <view class="vp-t-good" wx:if="{{item.positiveThought}}">🌟 重构: {{item.positiveThought}}</view>
+          </view>
+        </block>
+      </view>
+    </view>
+  </scroll-view>
+
+    <view class="ios-modal-footer flex-row">
+      <view class="ios-btn-secondary danger flex-1" hover-class="btn-hover" bindtap="onDeleteHistoryRecord">删除</view>
+      <view class="ios-btn-primary shadow-blue flex-2" hover-class="btn-primary-hover" bindtap="onLoadHistoryToEdit">提取至主页编辑</view>
+    </view>
+  </view>
+</view>
