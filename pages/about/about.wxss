@@ -1,8 +1,4 @@
-.about-page {
-  min-height: 100vh;
-  background-color: #F2F2F7;
-  padding-bottom: 60px;
-}
+.about-page { min-height: 100vh; background-color: var(--app-bg-color); padding-bottom: 60px; }
 
 .fade-in { animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) both; }
 .delay-1 { animation-delay: 0.1s; }
@@ -10,53 +6,65 @@
 .delay-3 { animation-delay: 0.3s; }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-/* 头部 */
-.header-section {
-  display: flex; flex-direction: column; align-items: center;
-  padding: 48px 20px 24px;
-}
-
-.app-icon-container {
-  width: 88px; height: 88px;
-  border-radius: 22px;
-  display: flex; align-items: center; justify-content: center;
-  margin-bottom: 16px;
-}
+.header-section { display: flex; flex-direction: column; align-items: center; padding: 48px 20px 24px; }
+.app-icon-container { width: 88px; height: 88px; border-radius: 22px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; background-color: #FFF; }
 .shadow-blue { box-shadow: 0 12px 24px rgba(0, 122, 255, 0.3); }
-
-.app-icon { font-size: 48px; }
+.app-icon { width: 60px; height: 60px; }
 .app-name { font-size: 24px; font-weight: 700; letter-spacing: -0.5px; margin-bottom: 4px; }
-.app-version { font-size: 15px; color: rgba(60,60,67,0.6); font-weight: 500; }
+.app-version { font-size: 15px; color: var(--app-text-secondary); font-weight: 500; }
 
-/* iOS Inset Grouped Form */
-.ios-form-group { margin: 0 16px 24px; }
-.ios-form-header { font-size: 13px; text-transform: uppercase; color: rgba(60,60,67,0.6); margin: 0 0 8px 16px; font-weight: 600; letter-spacing: 0.5px; }
+.app-form-group { margin: 0 16px 24px; }
+.app-form-header { font-size: 13px; text-transform: uppercase; color: var(--app-text-secondary); margin: 0 0 8px 16px; font-weight: 600; letter-spacing: 0.5px; }
 
-.ios-form-cell {
-  background-color: #FFFFFF;
-  padding: 16px 20px;
-  border-bottom: 0.5px solid rgba(60,60,67,0.1);
-}
-.ios-form-cell:first-child { border-radius: 12px 12px 0 0; }
-.ios-form-cell:last-child { border-bottom: none; border-radius: 0 0 12px 12px; }
-.ios-form-cell:only-child { border-radius: 12px; }
-
+.app-form-cell { background-color: var(--app-card-bg); padding: 16px 20px; border-bottom: 0.5px solid var(--app-border-color); transition: background-color 0.2s; }
+.app-form-cell:first-child { border-radius: 12px 12px 0 0; }
+.app-form-cell:last-child { border-bottom: none; border-radius: 0 0 12px 12px; }
+.app-form-cell:only-child { border-radius: 12px; }
 .block-cell { padding: 20px; }
 
-.content-text { font-size: 16px; color: #000000; line-height: 1.6; }
-
-/* 流程步骤 */
+.content-text { font-size: 15px; color: var(--app-text-primary); line-height: 1.7; }
 .step-row { display: flex; align-items: center; gap: 16px; }
-.step-num { width: 28px; height: 28px; background-color: rgba(0,122,255,0.1); color: #007AFF; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 15px; }
-.step-text { font-size: 16px; font-weight: 500; }
+.step-num { width: 28px; height: 28px; background-color: rgba(0,122,255,0.1); color: var(--app-blue); border-radius: 14px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 15px; }
+.step-icon { font-size: 20px; }
+.step-text { font-size: 15px; font-weight: 500; }
+.highlight-link { color: var(--app-blue); font-weight: 600; }
 
-/* 隐私列表 */
 .privacy-list { display: flex; flex-direction: column; gap: 16px; }
 .privacy-item { display: flex; align-items: flex-start; gap: 12px; }
 .p-icon { font-size: 20px; }
-.p-text { font-size: 15px; line-height: 1.5; color: #333; margin-top: 2px; }
+.p-icon-svg { width: 22px; height: 22px; flex-shrink: 0; }
+.p-text { font-size: 14px; line-height: 1.5; color: var(--app-text-primary); margin-top: 2px; }
 
-/* 底部 */
-.footer-section { padding: 32px 20px; text-align: center; display: flex; flex-direction: column; gap: 8px; }
-.footer-text { font-size: 13px; color: rgba(60,60,67,0.4); }
+.footer-section { padding: 32px 20px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.footer-text { font-size: 13px; color: var(--app-text-secondary); }
 .copyright { font-weight: 500; }
+.github-link { display: flex; align-items: center; gap: 6px; margin-top: 8px; }
+.github-icon { width: 16px; height: 16px; opacity: 0.6; }
+@media (prefers-color-scheme: dark) {
+  .github-icon, .p-icon-svg { filter: invert(1); }
+}
+
+.modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 1000; display: flex; align-items: flex-end; justify-content: center; }
+.app-modal { width: 100%; border-radius: 20px 20px 0 0; padding-bottom: env(safe-area-inset-bottom); display: flex; flex-direction: column; max-height: 85vh; animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1); box-shadow: 0 -10px 40px rgba(0,0,0,0.1); }
+.glass-overlay { background-color: rgba(0, 0, 0, 0.25); backdrop-filter: blur(10px); }
+.glass-panel { background-color: var(--app-panel-bg); backdrop-filter: saturate(200%) blur(30px); }
+.app-modal-header { display: flex; justify-content: space-between; align-items: center; padding: 18px 20px; border-bottom: 0.5px solid var(--app-border-color); }
+.app-modal-title { font-size: 17px; font-weight: 700; }
+.app-modal-close { color: var(--app-blue); font-size: 15px; font-weight: 600; padding: 8px 0; }
+/* 修复截断问题：加入足够底边距 */
+.app-modal-content { padding: 16px 20px calc(40px + env(safe-area-inset-bottom)); flex: 1; overflow-y: auto; }
+@keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+
+.book-link-box { display: flex; align-items: center; gap: 10px; background-color: var(--app-input-bg); padding: 12px; border-radius: 12px; margin-top: 8px; border: 1px dashed var(--app-blue); }
+.book-icon { font-size: 24px; }
+.book-text { font-size: 14px; font-weight: 600; color: var(--app-blue); line-height: 1.4; }
+
+.cl-container { padding-bottom: 20px; }
+.cl-version { font-size: 22px; font-weight: 800; color: var(--app-text-primary); margin-bottom: 20px; border-bottom: 2px solid var(--app-border-color); padding-bottom: 8px; }
+.cl-section { margin-bottom: 24px; background: var(--app-card-bg); padding: 16px; border-radius: 12px; border: 1px solid var(--app-border-color); }
+.cl-title { font-size: 15px; font-weight: 700; margin-bottom: 12px; display: inline-block; padding: 4px 8px; border-radius: 6px; }
+.cl-error { background: rgba(255,59,48,0.1); color: var(--app-red); }
+.cl-success { background: rgba(52,199,89,0.1); color: var(--app-green); }
+.cl-blue { background: rgba(0,122,255,0.1); color: var(--app-blue); }
+.cl-item { font-size: 14px; color: var(--app-text-primary); line-height: 1.6; margin-bottom: 8px; padding-left: 14px; position: relative; }
+.cl-item::before { content: "•"; position: absolute; left: 0; color: var(--app-text-tertiary); }

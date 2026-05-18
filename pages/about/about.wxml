@@ -1,70 +1,62 @@
 <view class="about-page">
   <view class="header-section fade-in">
-    <view class="app-icon-container">
+    <view class="app-icon-container shadow-blue">
       <image class="app-icon" src="/images/logo.png" mode="aspectFit"></image>
     </view>
     <view class="app-name">伯恩斯情绪记录</view>
+    <view class="app-version">v{{version}}</view>
   </view>
 
-  <view class="ios-form-group fade-in delay-1">
-    <view class="ios-form-header">应用简介</view>
-    <view class="ios-form-cell block-cell">
-      <text class="content-text" user-select="true">伯恩斯情绪记录是一款情绪管理辅助工具，有助于缓解焦虑、抑郁、恐惧、易怒等不良情绪。
+  <view class="app-form-group fade-in delay-1">
+    <view class="app-form-header">应用简介</view>
+    <view class="app-form-cell block-cell">
+      <view class="content-text" user-select="true">伯恩斯情绪记录是一款情绪管理辅助工具，有助于缓解焦虑、抑郁、恐惧、易怒等不良情绪。</view>
+      <view class="content-text" user-select="true" style="margin-top: 8px;">通过结构化的记录，帮助你客观评估情绪、识别消极思维中的"认知扭曲"，并通过深度追问重构更加理性和积极的思维模式。建议在情绪波动时使用，可以缓解情绪，且长期练习可有效提升情绪管理能力。</view>
+      <view class="content-text" user-select="true" style="margin-top: 8px;">本地化、优化了原版模型。理论依据：大卫•伯恩斯博士《新情绪疗法》、《伯恩斯焦虑自助疗法》。</view>
 
-通过结构化的记录，帮助你客观评估情绪、识别消极思维中的"认知扭曲"，并通过深度追问重构更加理性和积极的思维模式。
-
-建议在情绪波动时使用，长期练习可有效提升情绪管理能力。
-
-本程序本地化优化改进了伯恩斯原版认知扭曲列表，并将原本的纸质表格优化为了适宜在移动设备上记录浏览的形式。
-
-理论依据: 大卫·伯恩斯博士《新情绪疗法》、《伯恩斯焦虑自助疗法》（支持在微信读书中阅读）</text>
+      <view class="content-text" user-select="true" style="margin-top: 8px;">该模型由戴维·伯恩斯(David D. Burns)1984年提出，2003年修订。</view>
     </view>
   </view>
 
-  <view class="ios-form-group fade-in delay-2">
-    <view class="ios-form-header">使用流程</view>
-    <view class="ios-form-cell">
+  <view class="app-form-group fade-in delay-2">
+    <view class="app-form-header">使用流程与指南</view>
+    <view class="app-form-cell" hover-class="cell-hover" bindtap="onGoToTutorial">
       <view class="step-row">
-        <view class="step-num">1</view>
-        <view class="step-text">客观写下触发情绪的事实</view>
+        <view class="step-icon">📖</view>
+        <view class="step-text highlight-link">阅读《基于实例的详细使用说明》</view>
       </view>
     </view>
-    <view class="ios-form-cell">
-      <view class="step-row">
-        <view class="step-num">2</view>
-        <view class="step-text">选择情绪类别并评估强度</view>
-      </view>
+    <view class="app-form-cell">
+      <view class="step-row"><view class="step-num">1</view><view class="step-text">客观写下触发情绪的事实</view></view>
     </view>
-    <view class="ios-form-cell">
-      <view class="step-row">
-        <view class="step-num">3</view>
-        <view class="step-text">诊断想法中的认知扭曲并重构</view>
-      </view>
+    <view class="app-form-cell">
+      <view class="step-row"><view class="step-num">2</view><view class="step-text">选择情绪类别并评估强度</view></view>
     </view>
-    <view class="ios-form-cell">
-      <view class="step-row">
-        <view class="step-num">4</view>
-        <view class="step-text">复盘对比情绪的改善情况</view>
-      </view>
+    <view class="app-form-cell">
+      <view class="step-row"><view class="step-num">3</view><view class="step-text">诊断想法中的认知扭曲并重构</view></view>
+    </view>
+    <view class="app-form-cell">
+      <view class="step-row"><view class="step-num">4</view><view class="step-text">复盘对比情绪的改善情况</view></view>
     </view>
   </view>
 
-  <view class="ios-form-group fade-in delay-3">
-    <view class="ios-form-header">隐私与安全声明</view>
-    <view class="ios-form-cell block-cell">
+  <view class="app-form-group fade-in delay-3">
+    <view class="app-form-header">隐私与安全声明</view>
+    <view class="app-form-cell block-cell">
       <view class="privacy-list">
-        <view class="privacy-item">
-          <text class="p-icon">🛡️</text>
-          <text class="p-text">100% 离线运行，无任何网络数据请求</text>
-        </view>
-        <view class="privacy-item">
-          <text class="p-icon">💾</text>
-          <text class="p-text">所有记录均使用微信本地存储，不上传云端</text>
-        </view>
-        <view class="privacy-item">
-          <text class="p-icon">👤</text>
-          <text class="p-text">无需任何登录注册，不收集个人信息</text>
-        </view>
+        <view class="privacy-item"><image class="p-icon-svg" src="/images/safe.svg" style="transform: scale(1.05);"/><text class="p-text">100% 离线运行，无任何网络数据请求</text></view>
+        <view class="privacy-item"><image class="p-icon-svg" src="/images/save.svg" style="transform: scale(0.95);"/><text class="p-text">所有记录均使用微信本地存储，不上传云端</text></view>
+        <view class="privacy-item"><image class="p-icon-svg" src="/images/users.svg" style="transform: scale(1.0);"/><text class="p-text">无需任何登录注册，不收集个人信息</text></view>
+        <view class="privacy-item"><image class="p-icon-svg" src="/images/github.svg" style="transform: scale(1.0);"/><text class="p-text">代码已全量开源，透明可查，绝无后门</text></view>
+      </view>
+    </view>
+  </view>
+
+  <view class="app-form-group fade-in delay-3">
+    <view class="app-form-cell" hover-class="cell-hover" bindtap="onShowChangelog">
+      <view class="step-row">
+        <view class="step-icon">📋</view>
+        <view class="step-text highlight-link">查看 Changelog 更新日志</view>
       </view>
     </view>
   </view>
@@ -72,6 +64,55 @@
   <view class="footer-section">
     <text class="footer-text">非官方项目，与戴维·伯恩斯无隶属关系</text>
     <text class="footer-text copyright">LiuMashiro</text>
-    <text class="footer-text open">开源</text>
+    <view class="github-link">
+      <image class="github-icon" src="/images/github.svg" mode="aspectFit"></image>
+      <text class="footer-text open">GitHub开源</text>
+    </view>
+  </view>
+</view>
+
+<!-- 原生 WXML 排版的 Changelog 弹窗 -->
+<view wx:if="{{showChangelogModal}}" class="modal-overlay glass-overlay" bindtap="onCloseChangelog">
+  <view class="app-modal large glass-panel" catchtap="noop">
+    <view class="app-modal-header">
+      <text class="app-modal-title">Changelog</text>
+      <view class="app-modal-close" hover-class="btn-hover" bindtap="onCloseChangelog">关闭</view>
+    </view>
+    <scroll-view class="app-modal-content scrollable" scroll-y>
+      <view class="cl-container fade-in">
+        
+        <view class="cl-version">版本 [1.1.5]</view>
+        <view class="cl-section">
+          <view class="cl-title cl-blue">Changed</view>
+          <view class="cl-item">优化视觉效果</view>
+          <view class="cl-item">优化滑动条效果，现在支持实时数值、输入了。
+</view>
+        </view>
+        <view class="cl-section">
+          <view class="cl-title cl-success">Fixed</view>
+          <view class="cl-item">修复截断问题</view>
+        </view>
+
+        <view class="cl-version" style="margin-top: 30px;">版本 [1.1.0]</view>
+        <view class="cl-section">
+          <view class="cl-title cl-error">Breaking Changes</view>
+          <view class="cl-item">导出内容、历史记录新增日期记录，旧版本中导出的无日期记录格式将不再匹配，<text style="font-weight:700">不能再直接导入</text>。</view>
+        </view>
+        <view class="cl-section">
+          <view class="cl-title cl-success">Added</view>
+          <view class="cl-item">适配全局深色模式。</view>
+          <view class="cl-item">支持历史记录的批量全部导入、全部导出。</view>
+          <view class="cl-item">新增基于实例的详细使用教程。</view>
+          <view class="cl-item">新增查看 Changelog 功能。</view>
+        </view>
+        <view class="cl-section">
+          <view class="cl-title cl-blue">Changed</view>
+          <view class="cl-item">优化视觉效果。</view>
+          <view class="cl-item">优化震动触感反馈。</view>
+          <view class="cl-item">优化过渡动画。</view>
+          <view class="cl-item">文案和提示微调，更完善、符合语感。</view>
+        </view>
+      </view>
+    </scroll-view>
   </view>
 </view>
