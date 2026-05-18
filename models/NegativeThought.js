@@ -32,7 +32,7 @@ export class NegativeThought {
     this.id = this.generateId()
     this.content = '' // 消极想法内容
     this.beforeBelief = 100 // 之前相信程度（默认100）
-    this.afterBelief = 100 // 之后相信程度
+    this.afterBelief = 0 // 之后相信程度默认0
     this.distortions = [] // 认知扭曲类型列表
     this.ifThenQuestions = [] // "如果法"追问列表
     this.positiveThought = '' // 积极想法
@@ -79,7 +79,7 @@ export class NegativeThought {
     thought.id = json.id
     thought.content = json.content || ''
     thought.beforeBelief = json.beforeBelief !== undefined ? json.beforeBelief : 100
-    thought.afterBelief = json.afterBelief !== undefined ? json.afterBelief : 100
+    thought.afterBelief = json.afterBelief !== undefined ? json.afterBelief : 0
     thought.distortions = json.distortions || []
     thought.ifThenQuestions = (json.ifThenQuestions || []).map(q =>
       q.id ? IfThenQuestion.fromJSON(q) : q

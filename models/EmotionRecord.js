@@ -10,7 +10,7 @@ export class SelectedEmotion {
     this.selectedEmotions = [] // 已选择的具体情绪列表
     this.customEmotions = [] // 用户自定义的情绪
     this.beforeIntensity = 100 // 默认初始强度为100
-    this.afterIntensity = 100
+    this.afterIntensity = 0 // 默认之后强度为0
   }
 
   // 计算强度变化值（之前 - 之后，负值表示改善）
@@ -52,8 +52,8 @@ export class SelectedEmotion {
     const emotion = new SelectedEmotion(json.categoryId, json.categoryName)
     emotion.selectedEmotions = json.selectedEmotions || []
     emotion.customEmotions = json.customEmotions || []
-    emotion.beforeIntensity = json.beforeIntensity || 100
-    emotion.afterIntensity = json.afterIntensity || 100
+    emotion.beforeIntensity = json.beforeIntensity !== undefined ? json.beforeIntensity : 100
+    emotion.afterIntensity = json.afterIntensity !== undefined ? json.afterIntensity : 0
     return emotion
   }
 }
