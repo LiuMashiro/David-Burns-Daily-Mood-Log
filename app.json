@@ -1,16 +1,19 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/tutorial/tutorial",
     "pages/about/about"
   ],
   "window": {
-    "backgroundTextStyle": "dark",
-    "navigationBarBackgroundColor": "#FFFFFF",
+    "backgroundTextStyle": "@bgTxtStyle",
+    "navigationBarBackgroundColor": "@navBgColor",
     "navigationBarTitleText": "伯恩斯情绪记录",
-    "navigationBarTextStyle": "black",
-    "backgroundColor": "#F2F2F7",
+    "navigationBarTextStyle": "@navTxtStyle",
+    "backgroundColor": "@bgColor",
     "enablePullDownRefresh": false
   },
+  "darkmode": true,
+  "themeLocation": "theme.json",
   "style": "v2",
   "sitemapLocation": "sitemap.json",
   "lazyCodeLoading": "requiredComponents"
