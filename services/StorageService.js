@@ -1,6 +1,6 @@
 /**
- * 本地存储服务（深模块设计）
- * 封装所有wx.storage操作，提供简洁接口
+ * 本地存储服务
+ * 封装所有wx.storage操作
  */
 
 class StorageService {
@@ -130,7 +130,6 @@ class StorageService {
     })
   }
 
-  // ===== 私有方法（封装复杂性） =====
 
   /**
    * 异步获取存储
