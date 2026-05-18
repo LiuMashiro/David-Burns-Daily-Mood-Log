@@ -1,0 +1,124 @@
+<view class="tutorial-page">
+  <view class="article-title fade-in">基于实例的详细使用说明</view>
+  <view class="article-meta fade-in delay-1">摘自《伯恩斯自助焦虑疗法》第六章，经过精简、优化。</view>
+
+  <view class="article-content fade-in delay-2">
+    <view class="paragraph">“每日情绪日志”看似简单，却是一个能改变你想法与感受的强大工具。接下来，我将详细回顾这五个步骤，并指出每步中最常见的错误，帮助你立即开始使用。</view>
+    
+    <view class="step-box fade-in delay-3">
+      <view class="step-title">第一步：写下令你难受的事件</view>
+      <view class="step-desc">简短描述一件让你不安的事，务必包含人物、时间和地点。那个令你焦虑或沮丧的瞬间，可能就隐藏着你所有问题的根源。</view>
+      <view class="step-error">常见错误：急于在第一步就解决问题。不要只谈论问题而不动笔，必须聚焦在那个难受的特定时刻。</view>
+    </view>
+    
+    <view class="step-box fade-in delay-3">
+      <view class="step-title">第二步：选出消极情绪</view>
+      <view class="step-desc">从表格的情绪词汇中选出精准描述你此刻感受的词，并以0分（完全无感）到100分（极其强烈）打分。特定感受由特定的消极想法引发，这能帮你顺利进行下一步。</view>
+    </view>
+
+    <view class="step-box fade-in delay-3">
+      <view class="step-title">第三步：识别消极想法</view>
+      <view class="step-desc">记录你感到不安时脑中闪现的所有消极想法。问自己：“当我感到绝望时，我在想什么？”逐一列出，并以0分（根本不信）到100分（完全相信）打分。</view>
+      <view class="step-error">记录提示：一句话足矣；避免提问句式；不要描述感受（如“我担心考砸”），感受应填入情绪部分；不要混合事件与感受。</view>
+    </view>
+
+    <view class="step-box fade-in delay-3">
+      <view class="step-title">第四步：识别出想法中的认知扭曲</view>
+      <view class="step-desc">对照认知扭曲列表，在每个消极想法后标注其扭曲类型。通常一个想法中能发现多种扭曲。发现得越多，你越能看清这些想法的荒谬之处。</view>
+    </view>
+
+    <view class="step-box fade-in delay-3">
+      <view class="step-title">第五步：想出积极想法</view>
+      <view class="step-desc">用更积极、更现实的想法让消极想法不攻自破。积极想法必须满足两个条件：百分百真实，且能让消极想法不攻自破。在“相信程度”一栏为积极想法打分，并重新给对应的消极想法打分。只有同时满足两者，情绪才能真正得到改善。</view>
+    </view>
+  </view>
+
+  <view class="article-content fade-in delay-3">
+    <view class="paragraph">一位名叫玛莎的女士自告奋勇举了手。她告诉大家，自己最近一直担心女儿雷思丽。26岁的雷思丽曾成功手术，感觉好极了。但玛莎还是成天担忧：女儿有没有忘记吃药？有没有喝够八杯水？她一天会打好几次电话确认。尽管这种近乎神经质的关切让人心烦，雷思丽每次都很耐心地接听，母女关系一直很好。可玛莎很清楚，雷思丽过得很好，她的担忧确实过度了。</view>
+    <view class="paragraph">玛莎自己就是心理治疗师，每天都在和焦虑的病人打交道。她甚至觉得，自己行医就像在欺诈——给病人提了那么多建议，却没有一条能帮到自己。她对自己失望极了。</view>
+    <view class="paragraph">于是，我让玛莎填写“每日情绪日志”。</view>
+    
+    <view class="quote-block">第82页的表格便是玛莎的日志。她在“令你难受的事件”一栏只填了几个字：在做工作坊的时候也很担心雷思丽。</view>
+
+    <view class="paragraph">我让她先选出消极情绪并打分。玛莎选出了“悲伤”（100分），“焦虑”、“愧疚”、“羞愧”、“自卑”、“无能”、“孤独”、“尴尬”、“没有干劲”、“受阻”、“易发火”和“手足无措”。其中最强烈的是“受阻”和“手足无措”，她甚至打了200分，超过了上限。</view>
+
+    <view class="paragraph">接着，她在“消极想法”一栏写下：</view>
+    <view class="list-item">1. 我不应该这么傻傻地一直担心雷思丽。（之前：100分）</view>
+    <view class="list-item">2. 我得让自己放下心来，毕竟我是一个心理学家，我不应该这么神经质的。（之前：100分）</view>
+    <view class="list-item">3. 我可能会因此失去雷思丽的信任和尊重，因为我是这么无助！（之前：50分）</view>
+
+    <view class="paragraph">玛莎其实有两个重大问题：极度的担心，以及这种担心带来的强烈挫败感。她是当着所有同事的面做这个练习的，但事情不能只看表面——她抗拒改变，或许另有隐情。</view>
+    <view class="paragraph">我请她思考抗拒的原因。可能的推测包括：她认为担心是慈爱母亲的特质，是在保护女儿；她迷信一旦放松就会发生坏事；她觉得愧疚和自我批评能帮自己解决问题；或者，这些担心帮她暂时忘记了孤独或婚姻中的其他问题。</view>
+
+    <view class="paragraph">于是我问道：“玛莎，如果我能帮你今天就克服焦虑，从今天起不用再一直担心雷思丽，你愿意吗？”她表示一定会照做。我换了一种方式追问：“可万一雷思丽真的忘记吃药，或者没有喝够水，怎么办？如果你不再担心，可能也忘了提醒她，这岂不是很危险？而且你的担心，正说明你爱她呀。”</view>
+    <view class="paragraph">玛莎完全看穿了我的意图。她说雷思丽是个非常独立的孩子，其实并不需要她一直提醒。说完，她突然低下头，轻声说：“但是，我不能再失去另一个孩子了。”</view>
+
+    <view class="paragraph">泪水瞬间噙满她的眼眶。她声音颤抖地告诉我们，除了雷思丽，她还有一个女儿叫伊莱莎。伊莱莎患有先天水脑症，出生后不久脑中便植入了分流器，手术很成功，她成长为一个阳光女孩，中学时非常努力，考上了康奈尔大学的医学系预科。在学校家长访问日那天，玛莎从伊萨卡驱车前往曼哈顿见女儿。伊莱莎见到母亲很开心，但忍不住抱怨最近常头疼恶心。玛莎问有没有去做分流器清洁，伊莱莎保证没问题。玛莎开了一天车，累得只想回酒店休息，不过还是问了女儿要不要一起吃饭。听到伊莱莎说第二天有考试要在学校复习时，玛莎如释重负。</view>
+    <view class="paragraph">说到这里，玛莎又一次沉默了，眼泪在眼眶中打转，整个屋子安静得能听见针落地的声音。然后她说：“伊莱莎就在那个晚上去世了。”话音未落，她再也控制不住，失声痛哭。</view>
+
+    <view class="paragraph">等她稍平静后，我问她是否至今无法释怀，是否对伊莱莎的死感到愧疚。她含着泪点头，说那天的自己太自私了，如果能多陪一陪伊莱莎，也许女儿就不会死。她觉得自己让伊莱莎失望了，所以绝不能在雷思丽身上重复过去的错误。我让她把这些消极想法也加入日志，她给所有新增的想法都打了100分。</view>
+    <view class="paragraph">我问玛莎想先解决哪个问题，她选了第五个想法：“我该为伊莱莎的死负责，我真自私，我让她失望了。”这个想法背后遍布认知扭曲，包括非黑即白、以偏概全、负面滤镜、主观臆断、情绪推理、过度要求、乱贴标签、归咎指责等。当你能在想法中发现这么多扭曲时，这些想法又有多真实呢？</view>
+    
+    <view class="paragraph">我决定先用“双重标准法”。我们面对朋友的痛苦时往往格外客观而有同情心，于是我请她想象：如果一位朋友的女儿遭遇同样的事，你会对朋友说什么？会说“你得为你女儿的死负责，你真自私”吗？</view>
+    <view class="paragraph">玛莎震惊极了，连忙说绝对不会。她说：“我会告诉她，她也是人不是神，不可能无时无刻都照看得了孩子。如果她真的知道女儿那晚需要她，她一定会陪在身边，她一直都是这样做的。我会告诉她，她是个善良、爱孩子的妈妈，一点也不自私。”她强调，这番话每个字都是真心话。</view>
+
+    <view class="paragraph">我让她把这个积极想法写在第五个消极想法后面：“如果我知道伊莱莎那个晚上需要我，我一定会陪在她身边，就像所有其他爱孩子的妈妈一样。”她在“相信程度”一栏打了100分。于是，她的积极想法和消极想法直接冲突——一个人不可能同时相信两个完全矛盾的说法。玛莎说，此刻她不再觉得消极想法是事实。她给消极想法重新打分，从100分骤降至5分。</view>
+
+    <view class="quote-block">
+要让积极想法真正改变感受，必须满足两个条件：
+1. 必须百分百真实（必要条件）；
+2. 必须让消极想法不攻自破（充分条件）。
+玛莎的积极想法完全真实，也彻底瓦解了消极想法，因此她立刻放下了对伊莱莎之死的负罪感。
+    </view>
+
+    <view class="paragraph">我问她，对雷思丽的担忧是不是一直源于这种负罪感——害怕再次犯下“错误”而失去第二个女儿？玛莎愣住了。虽然她自己就是心理学家，却从未这样想过。她终于不再把担忧仅仅看作神经质，而是看作对两个女儿的爱的表现。那些被困在过去的愧疚，曾让伤口无法愈合，此刻，她终于能尽情释放多年的悲伤。大哭一场后，她感觉好多了。</view>
+    <view class="paragraph">接着，她又如法炮制，为其余的消极想法写出了针锋相对的积极想法。从日志中可以看到，所有消极想法的“之后”分数都大幅下降。重新评估情绪时，她的悲伤、焦虑、愧疚依然存在，但分数已降至极低，这是面对丧女之痛时完全正常的感受。她甚至决定，回家后要和雷思丽谈谈自己对伊莱莎的感受——这件事她以前从没想过。</view>
+    <view class="paragraph">只用了45分钟，玛莎就给困扰多年的担忧和负罪感画上了句号。当然，不是所有人都能如此迅速，但每个饱受焦虑和抑郁侵扰的人，都可以像她一样好转起来。玛莎的康复得益于她聚焦在一个特定焦虑时刻，在日志中准确识别感受和想法，触碰到了担忧背后对伊莱莎的负罪感，勇敢直面痛苦记忆，并最终用真实的积极想法原谅了自己。</view>
+  </view>
+
+  <view class="section-title fade-in delay-3">她填写的“每日情绪日志”如下：</view>
+  <view class="event-box fade-in delay-3">令人难受的事件：在参加工作坊的时候一直担心雷思丽。</view>
+
+  <scroll-view scroll-x class="table-container fade-in delay-3">
+    <view class="table">
+      <view class="tr th">
+        <view class="td w-20">情绪类别</view>
+        <view class="td w-40">具体情绪描述</view>
+        <view class="td w-20">之前</view>
+        <view class="td w-20">之后</view>
+      </view>
+      <view class="tr"><view class="td">悲伤</view><view class="td">忧郁、沮丧、消沉、难过</view><view class="td error-txt">100分</view><view class="td success-txt">15分</view></view>
+      <view class="tr"><view class="td">焦虑</view><view class="td">担忧、惊恐、紧张、害怕</view><view class="td error-txt">100分</view><view class="td success-txt">5分</view></view>
+      <view class="tr"><view class="td">愧疚</view><view class="td">悔过、感觉不好、羞愧</view><view class="td error-txt">90分</view><view class="td success-txt">5分</view></view>
+      <view class="tr"><view class="td">沮丧</view><view class="td">受阻、受挫、挫败感</view><view class="td error-txt">200分</view><view class="td success-txt">0分</view></view>
+    </view>
+  </scroll-view>
+
+  <scroll-view scroll-x class="table-container fade-in delay-3">
+    <view class="table">
+      <view class="tr th">
+        <view class="td w-10">序号</view>
+        <view class="td w-30">消极想法</view>
+        <view class="td w-10">之前</view>
+        <view class="td w-10">之后</view>
+        <view class="td w-40">积极想法与认知扭曲</view>
+      </view>
+      <view class="tr">
+        <view class="td">1</view>
+        <view class="td">我不应该这么傻傻地一直担心雷思丽。</view>
+        <view class="td error-txt">100分</view>
+        <view class="td success-txt">10分</view>
+        <view class="td"><text class="dist-tag">负面滤镜/过度要求</text>\n我一直以来的担心并没有必要，跟我傻不傻没关系。我担心是因为我爱我的女儿。(100分)</view>
+      </view>
+      <view class="tr">
+        <view class="td">5</view>
+        <view class="td">我应该为伊莱莎的死负责。我真自私，我让她失望了。</view>
+        <view class="td error-txt">100分</view>
+        <view class="td success-txt">5分</view>
+        <view class="td"><text class="dist-tag">非黑即白/归咎指责</text>\n如果我真的知道伊莱莎那个晚上需要我，我肯定会陪在女儿身边的，我一直以来也是这样做的。(100分)</view>
+      </view>
+    </view>
+  </scroll-view>
+
+  <view class="safe-area-bottom"></view>
+</view>
