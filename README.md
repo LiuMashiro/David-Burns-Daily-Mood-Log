@@ -1,6 +1,6 @@
 # 伯恩斯情绪记录
 ## David-Burns-Daily-Mood-Log
-**微信小程序：伯恩斯情绪记录**（备案审核中）
+**微信小程序：伯恩斯情绪记录**
 
 <img width="200" height="200" alt="code" src="https://github.com/user-attachments/assets/a66150b7-2791-4db3-93c7-1709cc57ec4b" />
 
